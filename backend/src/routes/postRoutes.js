@@ -12,7 +12,7 @@ const postRoute = express.Router();
 postRoute.post("/",validate(postValidation), createPost);
 postRoute.delete("/:id", deletePost);
 postRoute.get("/", getAllPost);
-postRoute.put("/:id", updatePost);
+postRoute.put("/:id", validate(postValidation),updatePost);
 postRoute.get("/:id", getSinglePost);
 
 export default postRoute;

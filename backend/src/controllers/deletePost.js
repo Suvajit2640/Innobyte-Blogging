@@ -6,12 +6,12 @@ export const deletePost = async (req, res) => {
     const id = req.params.id;
     const post = await posts.findByIdAndDelete(id);
     if (post) {
-      return res.status(statusCode.OK)({
+      return res.status(statusCode.OK).json({
         message: "Posts deleted successfully",
         data: post,
       });
     } else {
-      return res.status(statusCode.NOT_FOUND)({
+      return res.status(statusCode.NOT_FOUND).json({
         message: "Post not found",
       });
     }
