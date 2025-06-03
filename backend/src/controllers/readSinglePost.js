@@ -4,7 +4,9 @@ import { statusCode } from "../config/constant.js";
 export const getSinglePost = async (req, res) => {
     try {
         const _id = req.params.id;
-         const post = await posts.findById(_id);
+         const post = await posts.findOne({_id:_id,
+            authorId: req.userId,
+         });
         if(post)
         {
 

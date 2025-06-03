@@ -5,6 +5,10 @@ export const authMiddleware = async (req, res, next) => {
   let accessToken;
   try {
     const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.includes("Bearer")) {
+      return res.status(401).json({ success: false, message: "Unauthorized: No token provided" });
+    }
+
 
     if (authHeader.includes("Bearer")) {
       accessToken = authHeader.split(" ")[1];
@@ -37,7 +41,7 @@ export const authMiddleware = async (req, res, next) => {
               message: "User not found",
             });
           } else {
-            
+
             req.userId = user_id;
             next();
           }
