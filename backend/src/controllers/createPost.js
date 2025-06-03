@@ -3,12 +3,13 @@ import { statusCode } from "../config/constant.js";
 
 export const createPost = async (req, res) => {
     try {
-        // const userId = req.userId;
-        const { title, content,userId } = req.body;
+        
+        const userId = req.userId;
+        const { title, content } = req.body;
 
         const existing = await posts.findOne({
             title: req.body.title,
-            userId: req.userId,
+            authorId: req.userId,
         });
 
         if (existing) {

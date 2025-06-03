@@ -8,7 +8,7 @@ export const updatePost = async (req, res) => {
 
         const existing = await posts.findOne({
             title: title,
-            userId: req.userId,
+            authorId: req.userId,
             _id: { $ne: _id },
         });
 

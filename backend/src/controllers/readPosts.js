@@ -10,8 +10,7 @@ export const getAllPost = async (req, res) => {
         const offset = (page - 1) * limit;
 
         const filter = {
-            userId: req.userId,
-            title: { $regex: req.query.title || "", $options: "i" },
+            authorId: req.userId,
         };
 
         const allPosts = await posts

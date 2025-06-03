@@ -6,13 +6,15 @@ import { updatePost } from "../controllers/UpdatePost.js";
 import { getSinglePost } from "../controllers/readSinglePost.js";
 import { postValidation } from "../validators/dataValidation.js";
 import { validate } from "../middleware/validate.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
+import { isLoggedIn } from "../middleware/isLoggedIn.js";
 
 const postRoute = express.Router();
 
-postRoute.post("/",validate(postValidation), createPost);
-postRoute.delete("/:id", deletePost);
-postRoute.get("/", getAllPost);
-postRoute.put("/:id", validate(postValidation),updatePost);
-postRoute.get("/:id", getSinglePost);
+postRoute.post("/",validate(postValidation),authMiddleware,isLoggedIn ,createPost);
+postRoute.delete("/:id",authMiddleware,isLoggedIn , deletePost);
+postRoute.get("/",authMiddleware,isLoggedIn , getAllPost);
+postRoute.put("/:id", validate(postValidation),authMiddleware,isLoggedIn ,updatePost);
+postRoute.get("/:id",authMiddleware,isLoggedIn , getSinglePost);
 
 export default postRoute;
